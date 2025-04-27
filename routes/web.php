@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+ gabriela
+ master
 
-
-// Página de bienvenida (puedes personalizarla más tarde)
 Route::get('/', function () {
     return view('welcome');
 });
