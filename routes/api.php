@@ -78,4 +78,32 @@ Route::get('/ventas/{venta}/edit', [VentaController::class, 'edit'])->name('vent
 Route::put('/ventas/{venta}', [VentaController::class, 'update'])->name('ventas.update');
 Route::delete('/ventas/{venta}', [VentaController::class, 'destroy'])->name('ventas.destroy');
 
+//ellie
 
+// Home
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Productos
+Route::resource('productos', ProductoController::class);
+
+// Categorías
+Route::resource('categorias', CategoriaController::class);
+
+// Carrito
+Route::get('carrito', [CarritoController::class, 'index'])->name('carrito.index');
+Route::post('carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+
+// Pedidos
+Route::post('pedido/crear', [PedidoController::class, 'crear'])->name('pedido.crear');
+
+// Autenticación
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+// Admin
+Route::middleware(['auth', 'admin'])->group(function() {
+    Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+});
